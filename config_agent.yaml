@@ -63,10 +63,6 @@ definition:
     effort: low
   tools:
     - type: web_search
-    - type: code_interpreter
-      container:
-        file_ids: []
-        type: auto
   tool_choice: auto
   text:
     format:
