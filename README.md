@@ -66,6 +66,7 @@ sequenceDiagram
 agente-mago-magico/
 ├── .gitignore                      # Arquivos ignorados pelo Git (.venv, chaves, etc.)
 ├── README.md                       # Documentação do projeto
+├── config_agent.yaml               # Especificação, instruções do sistema (prompt) e ferramentas do Agente
 └── projeto-agente-mago-magico/     # Código-fonte da aplicação
     ├── agente.py                   # Módulo de integração: Azure AI Foundry & Scryfall API
     ├── app.py                      # Servidor Flask com rotas / e /api/chat
@@ -163,6 +164,28 @@ As configurações de conexão com a Azure estão centralizadas no arquivo `proj
 | `AGENT_NAME` | Nome do agente publicado no Microsoft Foundry | `Natalia-Ceoldo` |
 
 > 💡 **Boas Práticas de Produção**: Em ambientes de produção ou repositórios públicos, recomenda-se carregar essas variáveis por meio de variáveis de ambiente (`.env`) utilizando a biblioteca `python-dotenv`.
+
+---
+
+## 📜 Especificação e Prompt do Agente (`config_agent.yaml`)
+
+O arquivo [`config_agent.yaml`](config_agent.yaml) localizado na raiz do projeto guarda a definição declarativa completa e o versionamento do agente (`Natalia-Ceoldo:17`) configurado no **Azure AI Foundry**. 
+
+Isso garante a **preservação do conhecimento** e **portabilidade**, permitindo recriar o agente na Azure ou migrá-lo para outros modelos e plataformas (OpenAI, Anthropic Claude, Ollama/Llama 3, etc.).
+
+### Destaques das Instruções e Regras de Negócio:
+- **🧙‍♂️ Persona e Tom de Voz**: Atua como o mago *Gandalf*, respondendo de forma objetiva, acolhedora e mantendo o raciocínio interno privado, expondo apenas conclusões e próximos passos.
+- **🎯 Coleta e Diagnóstico**: Identifica a experiência do jogador (iniciante, intermediário ou avançado), o arquétipo desejado (fazendo até 5 perguntas guiadas caso o jogador não saiba) e o limite de orçamento.
+- **💰 Referência de Preços**: Orientado a pesquisar valores médios de cartas no mercado brasileiro através da [LigaMagic](https://www.ligamagic.com.br/) (considerando cartas em português ou inglês).
+- **⚠️ Tag Técnica de Integração (Scryfall)**: Sempre que define ou altera o comandante, o agente inclui obrigatoriamente a tag `[COMANDANTE: Nome Exato da Carta em Inglês]`. Essa tag é interceptada pelo backend Flask para buscar a arte no Scryfall e limpa antes de ser exibida no chat.
+- **📋 Formato de Exportação da Lista**: Cartas estruturadas linha a linha no padrão:
+  ```text
+  [Quantidade] [Card] [IDIOMA=PTEN]
+  ```
+  *(sendo a primeira carta da lista o próprio Comandante definido).*
+- **🛠️ Ferramentas & Modelo**:
+  - **Modelo**: `gpt-5.4-mini` (com esforço de raciocínio / *reasoning* configurado em `low`).
+  - **Tools**: `web_search` habilitado para consultas atualizadas de regras, cartas e preços.
 
 ---
 
