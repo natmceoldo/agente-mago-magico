@@ -1,0 +1,295 @@
+:root {
+    /* Fundo e Estrutura Escura */
+    --bg-dark: #121214;
+    --bg-panel: #1a1a1e;
+    --bg-card: #202024;
+    --border-color: #29292e;
+    --text-primary: #e1e1e6;
+    --text-muted: #7c7c8a;
+
+    /* Tons de Laranja Selecionados para Alto Contraste */
+    --orange-highlight: #ff8c37;   /* Destaques luminosos em fundo escuro (títulos, links, código) */
+    --orange-highlight-hover: #ffa65e;
+    --orange-user-bubble: #c2410c; /* Fundo escuro/vibrante da mensagem do usuário (contraste > 5.8:1 com branco) */
+    --orange-button: #d94e08;      /* Botão Enviar principal */
+    --orange-button-hover: #eb590e;/* Hover do botão */
+    --orange-focus: #ea580c;       /* Borda de foco em inputs */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+}
+
+/* Painel Esquerdo: Imagem do Comandante */
+#left-panel {
+    width: 35%;
+    background-color: var(--bg-panel);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+}
+
+#commander-title {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: var(--orange-highlight);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+#commander-card-container {
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 63 / 88;
+    /* Proporção padrão de carta de MTG */
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    transition: border-color 0.2s;
+}
+
+#commander-card-container:hover {
+    border-color: #3f322b;
+}
+
+#commander-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    border-radius: 10px;
+}
+
+#placeholder-text {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    padding: 10px;
+}
+
+/* Painel Direito: Chat */
+#right-panel {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#chat-header {
+    padding: 20px;
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: bold;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+}
+
+#chat-box {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Scrollbar estilizada */
+#chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+#chat-box::-webkit-scrollbar-thumb:hover {
+    background: var(--orange-focus);
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    word-break: break-word;
+}
+
+.user-message {
+    align-self: flex-end;
+    background-color: var(--orange-user-bubble);
+    color: #ffffff;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.agent-message {
+    align-self: flex-start;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Formatação rica de Markdown dentro das respostas do Agente */
+.agent-message p {
+    margin-bottom: 0.7em;
+}
+
+.agent-message p:last-child {
+    margin-bottom: 0;
+}
+
+.agent-message strong,
+.agent-message b {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.agent-message em,
+.agent-message i {
+    font-style: italic;
+    color: #e2e8f0;
+}
+
+.agent-message ul,
+.agent-message ol {
+    margin-left: 1.4rem;
+    margin-bottom: 0.7em;
+}
+
+.agent-message li {
+    margin-bottom: 0.35em;
+}
+
+.agent-message h1,
+.agent-message h2,
+.agent-message h3,
+.agent-message h4 {
+    margin-top: 0.8em;
+    margin-bottom: 0.4em;
+    color: var(--orange-highlight);
+    font-weight: 600;
+}
+
+.agent-message h1:first-child,
+.agent-message h2:first-child,
+.agent-message h3:first-child,
+.agent-message h4:first-child {
+    margin-top: 0;
+}
+
+.agent-message code {
+    background-color: var(--bg-dark);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--orange-highlight);
+    border: 1px solid #362923;
+}
+
+.agent-message pre {
+    background-color: var(--bg-dark);
+    padding: 10px 14px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin-bottom: 0.7em;
+    border: 1px solid var(--border-color);
+}
+
+.agent-message pre code {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+}
+
+.agent-message blockquote {
+    border-left: 3px solid var(--orange-highlight);
+    padding-left: 12px;
+    margin: 0.7em 0;
+    color: #a8a8b3;
+    font-style: italic;
+}
+
+.agent-message a {
+    color: var(--orange-highlight);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.agent-message a:hover {
+    color: var(--orange-highlight-hover);
+}
+
+#input-container {
+    padding: 20px;
+    background-color: var(--bg-panel);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 10px;
+}
+
+#message-input {
+    flex: 1;
+    padding: 12px;
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: #fff;
+    outline: none;
+    resize: none;
+    /* Impede o usuário de deformar a caixa arrastando */
+    height: 120px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#message-input:focus {
+    border-color: var(--orange-focus);
+    box-shadow: 0 0 0 1px var(--orange-focus);
+}
+
+button {
+    padding: 12px 24px;
+    background-color: var(--orange-button);
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--orange-button-hover);
+}
+
+button:active {
+    background-color: var(--orange-user-bubble);
+    transform: scale(0.98);
+}

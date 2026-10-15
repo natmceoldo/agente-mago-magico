@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commander Deck Builder AI</title>
+    <link rel="stylesheet" href="../static/style.css?v=2">
+</head>
+
+<body>
+
+    <!-- Painel Esquerdo: Imagem do Comandante -->
+    <div id="left-panel">
+        <div id="commander-title">Comandante Selecionado</div>
+        <div id="commander-card-container">
+            <span id="placeholder-text">A imagem do comandante aparecerá aqui quando for definido no chat.</span>
+            <img id="commander-img" src="" alt="Carta do Comandante">
+        </div>
+    </div>
+
+    <!-- Painel Direito: Chat -->
+    <div id="right-panel">
+        <div id="chat-header">Agente Mago Mágico de Commander MTG</div>
+        <div id="chat-box">
+            <div class="message agent-message">Saudações, viajante! Um mago nunca chega atrasado, nem adiantado; ele
+                chega exatamente quando pretende. Como posso ajudá-lo a forjar seu deck e dominar a mesa de Commander
+                hoje?
+            </div>
+        </div>
+        <div id="input-container">
+            <textarea id="message-input" rows="1"
+                placeholder="Digite sua mensagem... (Shift + Enter para pular linha)"></textarea>
+            <button id="send-btn" onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='marked.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}?v=2"></script>
+</body>
+
+</html>

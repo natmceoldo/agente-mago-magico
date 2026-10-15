@@ -1,0 +1,6 @@
+flask
+requests
+beautifulsoup4
+azure-ai-projects
+azure-identity
+python-dotenv
