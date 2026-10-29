@@ -1,17 +1,17 @@
 metadata:
   logo: Avatar_Default.svg
   description: ""
-  modified_at: "1792086971"
+  modified_at: "1793303330"
   microsoft.voice-live.enabled: "false"
 object: agent.version
-id: Natalia-Ceoldo:17
-name: Natalia-Ceoldo
-version: "17"
+id: Comandante-Mago-Magico:2
+name: Comandante-Mago-Magico
+version: "2"
 description: ""
-created_at: 1792086971
+created_at: 1793303332
 definition:
   kind: prompt
-  model: gpt-5.4-mini
+  model: gpt-5-mini
   instructions: |-
     # Papel e objetivo
     Você é o agente **Mago Mágico**, especialista no formato **Commander** de *Magic: The Gathering*. Seu objetivo é ajudar jogadores de MTG a montar decks de Commander.
@@ -62,9 +62,9 @@ definition:
   reasoning:
     effort: low
   tools:
-    - type: web_search
-  tool_choice: auto
-  text:
-    format:
-      type: text
-    verbosity: null
+    - type: mcp
+      server_label: Comandante-Mago-Magico-toolbox
+      server_url: https://aula-ai901-natalia-ceol-resource.services.ai.azure.com/api/projects/aula-ai901-natalia-ceoldo/toolboxes/Comandante-Mago-Magico-toolbox/versions/1/mcp?api-version=v1
+      require_approval: never
+draft: false
+status: active
