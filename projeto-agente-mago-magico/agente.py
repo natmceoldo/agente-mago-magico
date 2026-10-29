@@ -4,8 +4,8 @@ import re
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
 
-ENDPOINT = "https://aula-agente-lucas-resource.services.ai.azure.com/api/projects/aula-agente-lucas"
-AGENT_NAME = "Natalia-Ceoldo"
+ENDPOINT = "https://aula-ai901-natalia-ceol-resource.services.ai.azure.com/api/projects/aula-ai901-natalia-ceoldo"
+AGENT_NAME = "Comandante-Mago-Magico"
 
 def buscar_imagem_scryfall(nome_comandante: str) -> str:
     """Consome a API do Scryfall e retorna a URL da imagem normal da carta."""
